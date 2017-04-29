@@ -30,7 +30,7 @@ export default {
 
   .item {
     position: relative;
-    padding: .5em 0 .5em 2.5em;
+    padding: .75em 0 .75em 2.5em;
   }
 
   .item + .item {
