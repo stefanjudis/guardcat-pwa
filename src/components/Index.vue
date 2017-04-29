@@ -1,6 +1,8 @@
 <template>
   <div class="root">
-    <TopBar></TopBar>
+    <header>
+      <TopBar></TopBar>
+    </header>
     <main>
       <scroller class="scroller" :on-refresh="refresh" refresh-text="Fetching notifications">
         <NotificationList v-if="notifications.length" :notifications="notifications"></NotificationList>
@@ -65,12 +67,21 @@ export default {
   left: 0;
 }
 
+header {
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+}
+
 main {
   position: absolute;
 
   top: 4em;
-  bottom: 0;
   left: 0;
   right: 0;
+}
+
+.scroller {
+  position: relative !important;
 }
 </style>

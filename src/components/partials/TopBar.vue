@@ -1,8 +1,8 @@
 <template>
-  <header class="topBar">
+  <div class="topBar">
     <span class="topBar__title">GuardCat</span>
     <button type="button">Menu</button>
-  </header>
+  </div>
 </template>
 
 <script>
