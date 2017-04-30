@@ -99,6 +99,7 @@ body, html {
   padding: 0;
 
   height: 100%;
+  overflow: hidden;
 }
 
 header {
