@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/components/Index'
 import Login from '@/components/Login'
+import Settings from '@/components/Settings'
 
 Vue.use(Router)
 
@@ -9,13 +10,18 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Index',
+      name: 'GuardCat',
       component: Index
     },
     {
       path: '/login',
-      name: 'Login',
+      name: 'Sogin',
       component: Login
+    },
+    {
+      path: '/settings',
+      name: 'Settings',
+      component: Settings
     }
   ]
 })

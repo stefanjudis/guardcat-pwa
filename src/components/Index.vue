@@ -1,30 +1,26 @@
 <template>
   <div class="root">
-    <header>
-      <TopBar></TopBar>
-    </header>
-    <main>
-      <scroller class="scroller" :on-refresh="refresh" refresh-text="Fetching notifications">
-        <NotificationList v-if="notifications.length" :notifications="notifications"></NotificationList>
-        <div v-if="!notifications.length">
-          No nofitications
-        </div>
-      </scroller>
-    </main>
+    <scroller class="scroller" :on-refresh="refresh" refresh-text="Fetching notifications">
+      <NotificationList v-if="notifications.length" :notifications="notifications"></NotificationList>
+      <div v-if="!notifications.length" class="emptyMsg">
+        <span class="number">0</span>
+        nofitications
+        <span class="pullMsg">Pssst... You can pull to refresh</span>
+      </div>
+    </scroller>
   </div>
 </template>
 
 <script>
 import NotificationList from './partials/NotificationList'
-import TopBar from './partials/TopBar'
 import guardCat from 'guardcat'
 
 export default {
   name: 'index',
   data () {
     return {
-      token: localStorage.getItem('token'),
-      notifications: JSON.parse(localStorage.getItem('notifications')) || []
+      notifications: JSON.parse(localStorage.getItem('notifications')) || [],
+      token: localStorage.getItem('token')
     }
   },
   methods: {
@@ -51,7 +47,6 @@ export default {
     }
   },
   components: {
-    TopBar,
     NotificationList
   }
 }
@@ -59,26 +54,22 @@ export default {
 
 <style scoped>
 
-.root {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+.emptyMsg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: calc(100vh - 4em);
 }
 
-header {
-  position: fixed;
-  width: 100%;
-  z-index: 10;
+.pullMsg {
+  display: block;
+  margin: 1em 0;
+  font-style: italic;
 }
 
-main {
-  position: absolute;
-
-  top: 4em;
-  left: 0;
-  right: 0;
+.number {
+  font-size: 50vw;
 }
 
 .scroller {

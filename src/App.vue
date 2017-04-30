@@ -1,12 +1,22 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <header>
+      <TopBar></TopBar>
+    </header>
+    <main>
+      <router-view></router-view>
+    </main>
   </div>
 </template>
 
 <script>
+import TopBar from './components/partials/TopBar'
+
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    TopBar
+  }
 }
 </script>
 
@@ -30,6 +40,21 @@ body, html {
   padding: 0;
 
   height: 100%;
+}
+
+header {
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+}
+
+main {
+  position: absolute;
+
+  top: 3.5em;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 #app {
