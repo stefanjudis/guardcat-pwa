@@ -14,7 +14,7 @@
     <div v-if="showSettings" class="menu">
       <ul>
         <li><router-link :to="{ name: 'Settings'}">Settings</router-link></li>
-        <li>Log out</li>
+        <li><button type="button" @click="triggerLogout">Log out</button></li>
       </ul>
     </div>
   </div>
@@ -24,7 +24,7 @@
 
 export default {
   name: 'tobBar',
-  props: ['refresh'],
+  props: ['refresh', 'logout'],
   data () {
     return {
       showSettings: false
@@ -33,6 +33,10 @@ export default {
   methods: {
     toggleSettings () {
       this.showSettings = !this.showSettings
+    },
+    triggerLogout () {
+      this.showSettings = false
+      this.logout()
     }
   }
 }

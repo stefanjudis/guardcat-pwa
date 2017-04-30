@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header>
-      <TopBar :refresh="refresh"></TopBar>
+      <TopBar :logout="showLogoutDialog" :refresh="refresh"></TopBar>
     </header>
     <main>
       <router-view></router-view>
@@ -10,6 +10,16 @@
         <span v-if="showSuccessMsg">Notifications updated</span>
       </div>
     </main>
+    <div v-if="logoutDialogIsVisible" class="overlay">
+      <section v-if="logoutDialogIsVisible" role="alert" aria-live="assertive">
+        Wanna log out?!
+        <p>This means that your localStorage entry will be deleted and you can't use GuardCat until you enter a new GitHub Access Token.</p>
+        <footer>
+          <button type="button" @click="hideLogoutDialog">Stay logged in</button>
+          <button type="button" @click="logout">Log out</button>
+        </footer>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -24,6 +34,7 @@ export default {
       isRefreshing: false,
       notifications: JSON.parse(localStorage.getItem('notifications')) || [],
       repoPatterns: ['stefanjudis/*', 'tc39/ecma262'],
+      logoutDialogIsVisible: false,
       showSuccessMsg: false,
       token: localStorage.getItem('token')
     }
@@ -32,6 +43,16 @@ export default {
     TopBar
   },
   methods: {
+    hideLogoutDialog () {
+      this.logoutDialogIsVisible = false
+    },
+    showLogoutDialog () {
+      this.logoutDialogIsVisible = true
+    },
+    logout () {
+
+    },
+
     refresh () {
       if (!this.isRefreshing) {
         this.isRefreshing = true
@@ -106,11 +127,35 @@ main {
   color: #fff;
 }
 
+[role="alert"] {
+  max-width: 20em;
+  padding: 1em 2em;
+  color: var(--c-text);
+  background: #fff;
+
+  z-index: 12;
+}
+
 #app {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, .5);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 11;
 }
 
 * {
