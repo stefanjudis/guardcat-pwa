@@ -28,5 +28,10 @@ export default {
       localStorage.setItem('notifications', JSON.stringify(notifications))
       return notifications
     })
+  },
+
+  clear () {
+    notifications = []
+    localStorage.removeItem('notifications')
   }
 }

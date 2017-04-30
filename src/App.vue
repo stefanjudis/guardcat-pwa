@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <header>
+    <header v-if="$route.name !== 'Login'">
       <TopBar :logout="showLogoutDialog" :refresh="refresh"></TopBar>
     </header>
     <main>
@@ -25,18 +25,18 @@
 
 <script>
 import TopBar from './components/partials/TopBar'
-import notification from './lib/notifications'
+import notifications from './lib/notifications'
+import settings from './lib/settings'
 
 export default {
   name: 'app',
   data () {
     return {
       isRefreshing: false,
-      notifications: JSON.parse(localStorage.getItem('notifications')) || [],
+      notifications: notifications.get(),
       repoPatterns: ['stefanjudis/*', 'tc39/ecma262'],
       logoutDialogIsVisible: false,
-      showSuccessMsg: false,
-      token: localStorage.getItem('token')
+      showSuccessMsg: false
     }
   },
   components: {
@@ -50,15 +50,19 @@ export default {
       this.logoutDialogIsVisible = true
     },
     logout () {
-
+      settings.logout()
+      notifications.clear()
+      this.logoutDialogIsVisible = false
+      // TODO add parameter to say successfully logged out
+      this.$router.push('/login')
     },
 
     refresh () {
       if (!this.isRefreshing) {
         this.isRefreshing = true
 
-        notification.fetch({
-          token: this.token,
+        notifications.fetch({
+          token: settings.get('token'),
           repoPatterns: this.repoPatterns
         })
           .then(notifications => {
