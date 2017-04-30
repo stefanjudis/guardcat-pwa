@@ -114,7 +114,7 @@ main {
   top: 4em;
   left: 0;
   right: 0;
-  height: calc(100vh - 3.5em);
+  height: calc(100vh - 4em);
 
   overflow: scroll;
 }
