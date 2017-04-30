@@ -45,6 +45,12 @@ export default {
     border: none;
   }
 
+  svg {
+    display: block;
+    height: 28px;
+    width: 28px;
+  }
+
   .refreshBtn {
     margin-left: auto;
   }
@@ -52,7 +58,7 @@ export default {
   .menu {
     position: absolute;
 
-    top: .5em;
+    top: .75em .5em;
     right: 3em;
 
     background: #fff;
@@ -64,7 +70,6 @@ export default {
   }
 
   .backLink svg {
-    display: block;
     fill: #fff;
   }
 
