@@ -3,7 +3,7 @@ import guardCat from 'guardcat'
 let notifications
 
 try {
-  notifications = JSON.parse(localStorage.getItem('notifications'))
+  notifications = JSON.parse(localStorage.getItem('notifications')) || []
 } catch (e) {
   notifications = []
 }
