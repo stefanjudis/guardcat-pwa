@@ -111,10 +111,10 @@ header {
 main {
   position: absolute;
 
-  top: 4em;
+  top: 4.5em;
   left: 0;
   right: 0;
-  height: calc(100vh - 4em);
+  height: calc(100vh - 4.5em);
 
   overflow: scroll;
 }
